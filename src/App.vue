@@ -7,12 +7,28 @@
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
+import axios from 'axios'
+
+axios.defaults.timeout = 10000;
 
 export default {
   name: 'App',
   components: {
     HelloWorld
-  }
+  },
+  created(){
+    axios.get('/api/json', {
+      params: {}
+    }).then(
+      res => {
+        console.log(res);
+      }
+    ).catch(
+      error => {
+          console.log(error);
+      }
+    )
+  },
 }
 </script>
 
