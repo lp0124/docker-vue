@@ -1,0 +1,31 @@
+version: '3.1'
+services: 
+  server:
+    restart: always
+    build:
+      context: ./
+      dockerfile: nodeServe
+    container_name: vueNodeServer
+    ports:
+      - 5000:8080
+  nginx:
+    restart: always
+    image: nginx
+    container_name: vueApp
+    ports:
+      - 3000:80
+    volumes:
+      - /Users/lp0124/docker-vue/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - /Users/lp0124/docker-vue/dist:/usr/share/nginx/html
+    networks:
+      customNetwork:
+        ipv4_address: 172.188.0.5
+
+networks:
+  customNetwork:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.188.0.0/24"
+        
