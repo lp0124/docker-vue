@@ -8,6 +8,9 @@ services:
     container_name: vueNodeServer
     ports:
       - 5000:8080
+    networks:
+      customNetwork:
+        ipv4_address: 172.188.0.4
   nginx:
     restart: always
     image: nginx
